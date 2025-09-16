@@ -1,0 +1,10 @@
+fullName,email,phone,city,propertyType,bhk,purpose,budgetMin,budgetMax,timeline,source,notes,tags,status
+John Doe,john@example.com,9876543210,Chandigarh,Apartment,Three,Buy,5000000,7000000,ZeroToThree,Website,Looking for 3BHK apartment,[],New
+Priya Sharma,priya.sharma@gmail.com,9811122233,Mohali,Villa,Four,Buy,12000000,15000000,ThreeToSix,Referral,Prefers sea-facing villa,[],Contacted
+Arjun Mehta,arjun.mehta@yahoo.com,9123456789,Chandigarh,Apartment,Two,Rent,25000,40000,ZeroToThree,Call,Needs near IT hub,[],New
+Neha Verma,neha.verma@outlook.com,9001122334,Panchkula,Apartment,Three,Buy,8000000,10000000,ThreeToSix,Website,Wants good location,[],Qualified
+Karan Gupta,karan.gupta@gmail.com,9898989898,Zirakpur,Apartment,One,Rent,15000,22000,ZeroToThree,WalkIn,Looking for fully furnished,[],Converted
+Ananya Singh,ananya.singh@yahoo.com,9222333444,Mohali,Villa,Four,Buy,18000000,22000000,MoreThanSix,Other,Wants gated community,[],New
+Rohit Kumar,rohit.kumar@live.com,9112233445,Chandigarh,Apartment,Two,Buy,4500000,6000000,ZeroToThree,Referral,Close to metro station,[],Contacted
+Sneha Iyer,sneha.iyer@gmail.com,9334455667,Panchkula,Apartment,Three,Rent,30000,50000,ZeroToThree,Website,Needs pet-friendly apartment,[],New
+Vivek Patel,vivek.patel@gmail.com,9556677889,Zirakpur,Plot,,Buy,10000000,14000000,MoreThanSix,Call,Interested in investment property,[],Qualified

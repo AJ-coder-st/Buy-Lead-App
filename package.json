@@ -1,0 +1,33 @@
+{
+  "name": "buyer-leads",
+  "version": "1.0.0",
+  "description": "Buyer leads management system",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install": "pnpm install --recursive",
+    "dev": "concurrently \"pnpm backend:dev\" \"pnpm frontend:dev\"",
+    "build": "pnpm backend:build && pnpm frontend:build",
+    "test": "pnpm backend:test && pnpm frontend:test",
+    "lint": "pnpm backend:lint && pnpm frontend:lint",
+    "backend:dev": "cd backend && pnpm dev",
+    "backend:build": "cd backend && pnpm build",
+    "backend:test": "cd backend && pnpm test",
+    "backend:lint": "cd backend && pnpm lint",
+    "backend:migrate": "cd backend && pnpm prisma migrate dev",
+    "backend:seed": "cd backend && pnpm prisma db seed",
+    "frontend:dev": "cd frontend && pnpm dev",
+    "frontend:build": "cd frontend && pnpm build",
+    "frontend:test": "cd frontend && pnpm test",
+    "frontend:lint": "cd frontend && pnpm lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

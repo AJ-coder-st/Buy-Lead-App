@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      String   // 'user' | 'admin'
+  buyers    Buyer[]  @relation("owner")
+  createdAt DateTime @default(now())
+
+  @@map("users")
+}
+
+model Buyer {
+  id           String        @id @default(uuid())
+  fullName     String
+  email        String?
+  phone        String
+  city         String        // Chandigarh, Mohali, Zirakpur, Panchkula, Other
+  propertyType String        // Apartment, Villa, Plot, Office, Retail
+  bhk          String?       // Studio, One, Two, Three, Four (nullable if not applicable)
+  purpose      String        // Buy, Rent
+  budgetMin    Int?
+  budgetMax    Int?
+  timeline     String        // ZeroToThree, ThreeToSix, MoreThanSix, Exploring
+  source       String        // Website, Referral, WalkIn, Call, Other
+  status       String        @default("New") // New, Qualified, Contacted, Visited, Negotiation, Converted, Dropped
+  notes        String?
+  tags         String        @default("[]") // JSON string array
+  ownerId      String
+  owner        User          @relation(fields: [ownerId], references: [id], name: "owner")
+  history      BuyerHistory[]
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+
+  @@index([phone])
+  @@index([email])
+  @@index([updatedAt])
+  @@index([ownerId])
+  @@index([status])
+  @@index([city])
+  @@index([propertyType])
+  @@map("buyers")
+}
+
+model BuyerHistory {
+  id        String   @id @default(uuid())
+  buyerId   String
+  buyer     Buyer    @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  changedBy String
+  changedAt DateTime @default(now())
+  diff      String   // JSON string
+
+  @@index([buyerId])
+  @@index([changedAt])
+  @@map("buyer_history")
+}
+
+// SQLite doesn't support enums, so we use String fields with constraints
