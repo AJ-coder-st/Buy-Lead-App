@@ -52,8 +52,10 @@ export function BuyersList() {
       const response = await buyersApi.list(query)
       setData(response.data)
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to load buyers')
-      toast.error('Failed to load buyers')
+      console.error('Error loading buyers:', err)
+      const errorMessage = err.response?.data?.error || err.message || 'Failed to load buyers'
+      setError(errorMessage)
+      // Don't show toast error immediately, let user see the error state
     } finally {
       setLoading(false)
     }
@@ -86,18 +88,20 @@ export function BuyersList() {
     return (
       <div className="flex items-center justify-center py-12">
         <LoadingSpinner size="lg" />
+        <span className="ml-2 text-muted-foreground">Loading buyers...</span>
       </div>
     )
   }
 
   if (error) {
     return (
-      <Card>
-        <CardContent className="p-6 text-center">
-          <p className="text-destructive mb-4">{error}</p>
-          <Button onClick={loadBuyers}>Try Again</Button>
-        </CardContent>
-      </Card>
+      <div className="text-center py-12 space-y-4">
+        <div className="text-destructive text-lg font-medium">Unable to load buyers</div>
+        <p className="text-muted-foreground">{error}</p>
+        <Button onClick={loadBuyers} variant="outline">
+          Try Again
+        </Button>
+      </div>
     )
   }
 
