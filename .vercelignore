@@ -1,0 +1,10 @@
+backend/
+node_modules/
+.git/
+*.log
+.env
+.env.local
+.env.production.local
+.env.development.local
+simple_test.csv
+test_comprehensive.csv
