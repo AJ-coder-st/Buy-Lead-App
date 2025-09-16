@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001');
+// Force use of current domain for Vercel functions
+const API_BASE_URL = typeof window !== 'undefined' ? window.location.origin : '';
 
 // Create axios instance with default config
 export const api = axios.create({
   baseURL: API_BASE_URL,
-  withCredentials: true,
+  withCredentials: false, // Disable for Vercel functions
   headers: {
     'Content-Type': 'application/json',
   },
