@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3001');
 
 // Create axios instance with default config
 export const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -99,7 +99,21 @@ export interface UpdateBuyerInput extends CreateBuyerInput {
 
 // Auth API
 export const authApi = {
-  demoLogin: () => api.post('/api/auth/demo-login'),
+  demoLogin: async () => {
+    const response = await api.post('/api/auth/demo-login');
+    const { token, user } = response.data;
+    
+    // Store token in localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+    
+    // Set default authorization header
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    
+    return { token, user };
+  },
   logout: () => api.post('/api/auth/logout'),
   getMe: () => api.get<{ user: User }>('/api/auth/me'),
 };

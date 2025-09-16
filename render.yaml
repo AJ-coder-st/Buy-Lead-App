@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: buy-lead-app-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DATABASE_URL
+        value: file:./prod.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://frontend-fx32fv087-bharath-wajs-projects-a57c3e59.vercel.app
