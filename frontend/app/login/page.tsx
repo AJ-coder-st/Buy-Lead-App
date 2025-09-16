@@ -19,12 +19,17 @@ export default function LoginPage() {
   const handleDemoLogin = async () => {
     setIsLoading(true)
     try {
-      await authApi.demoLogin()
+      const result = await authApi.demoLogin()
+      console.log('Login successful:', result)
       toast.success('Successfully logged in as demo user!')
-      router.push('/buyers')
+      
+      // Add a small delay to ensure state is updated
+      setTimeout(() => {
+        window.location.href = '/buyers'
+      }, 500)
     } catch (error: any) {
+      console.error('Login error:', error)
       toast.error(error.response?.data?.error || 'Login failed')
-    } finally {
       setIsLoading(false)
     }
   }
