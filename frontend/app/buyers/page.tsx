@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { BuyersList } from './BuyersList'
 import { BuyersFilters } from './BuyersFilters'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 
 export default function BuyersPage() {
   return (
@@ -18,14 +19,16 @@ export default function BuyersPage() {
           </div>
         </div>
         
-        <Suspense fallback={
-          <div className="flex items-center justify-center py-12">
-            <LoadingSpinner size="lg" />
-          </div>
-        }>
-          <BuyersFilters />
-          <BuyersList />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={
+            <div className="flex items-center justify-center py-12">
+              <LoadingSpinner size="lg" />
+            </div>
+          }>
+            <BuyersFilters />
+            <BuyersList />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   )

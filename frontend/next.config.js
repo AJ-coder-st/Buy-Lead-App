@@ -3,7 +3,9 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: '',
   },
-  output: 'standalone',
+  // Disable standalone to avoid symlink issues on Windows local builds
+  // Vercel can still deploy without standalone
+  // output: 'standalone',
   experimental: {
     outputFileTracingRoot: undefined,
   },

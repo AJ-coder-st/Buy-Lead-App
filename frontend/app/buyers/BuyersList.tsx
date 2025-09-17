@@ -49,7 +49,23 @@ export function BuyersList() {
         sort: searchParams.get('sort') || 'updatedAt_desc',
       }
 
+      console.log('Loading buyers with query:', query)
       const response = await buyersApi.list(query)
+      console.log('API Response:', response.data)
+      
+      // Validate response structure
+      if (!response.data || typeof response.data !== 'object') {
+        throw new Error('Invalid API response structure')
+      }
+      
+      if (!response.data.buyers || !Array.isArray(response.data.buyers)) {
+        throw new Error('Invalid buyers data in response')
+      }
+      
+      if (!response.data.pagination || typeof response.data.pagination !== 'object') {
+        throw new Error('Invalid pagination data in response')
+      }
+      
       setData(response.data)
     } catch (err: any) {
       console.error('Error loading buyers:', err)

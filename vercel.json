@@ -3,10 +3,17 @@
   "builds": [
     {
       "src": "frontend/package.json",
-      "use": "@vercel/next"
+      "use": "@vercel/next",
+      "config": {
+        "distDir": ".next"
+      }
     }
   ],
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/src/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "frontend/$1"
@@ -15,6 +22,8 @@
   "env": {
     "NODE_ENV": "production"
   },
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/.next",
   "functions": {
     "frontend/**/*.js": {
       "maxDuration": 30

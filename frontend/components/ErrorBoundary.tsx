@@ -49,11 +49,19 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {process.env.NODE_ENV === 'development' && this.state.error && (
+              {this.state.error && (
                 <div className="p-3 bg-muted rounded-md">
                   <p className="text-sm font-mono text-muted-foreground">
                     {this.state.error.message}
                   </p>
+                  {this.state.error.stack && (
+                    <details className="mt-2">
+                      <summary className="text-xs cursor-pointer">Stack trace</summary>
+                      <pre className="text-xs mt-1 whitespace-pre-wrap">
+                        {this.state.error.stack}
+                      </pre>
+                    </details>
+                  )}
                 </div>
               )}
               <Button onClick={this.resetError} className="w-full">
