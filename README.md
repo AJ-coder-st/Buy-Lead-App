@@ -1,350 +1,240 @@
-# 🏠 Buy Lead App
+# Buy Lead App
 
-<div align="center">
+A production-ready full-stack TypeScript application for managing buyer leads with Next.js frontend and Node.js backend.
 
-![Buy Lead App Logo](https://img.shields.io/badge/Buy%20Lead%20App-Real%20Estate%20CRM-blue?style=for-the-badge&logo=home&logoColor=white)
+## 🚀 Live Demo
 
-**A comprehensive real estate lead management system built with modern web technologies**
-
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-
-</div>
-
-## 📋 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [✨ Features](#-features)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🚀 Quick Start](#-quick-start)
-- [📁 Project Structure](#-project-structure)
-- [🔧 Configuration](#-configuration)
-- [📊 CSV Import](#-csv-import)
-- [🔐 Authentication](#-authentication)
-- [🌐 API Documentation](#-api-documentation)
-- [🧪 Testing](#-testing)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-
-## 🎯 Overview
-
-Buy Lead App is a modern, full-stack real estate lead management system designed to help real estate professionals efficiently manage buyer leads, track interactions, and streamline their sales process. The application provides a comprehensive solution for lead capture, validation, and management with robust CSV import capabilities.
-
-### 🎨 Key Highlights
-
-- **Modern UI/UX**: Clean, responsive interface built with Next.js and Tailwind CSS
-- **Robust Backend**: RESTful API with TypeScript, Express.js, and Prisma ORM
-- **Advanced CSV Import**: Comprehensive validation and error handling for bulk lead imports
-- **Real-time Updates**: Live data synchronization and instant feedback
-- **Secure Authentication**: JWT-based authentication with role-based access control
-- **Comprehensive Validation**: Multi-layer data validation ensuring data integrity
+**Frontend**: https://frontend-cif9vfjni-bharath-wajs-projects-a57c3e59.vercel.app
 
 ## ✨ Features
 
-### 🏢 Lead Management
-- ✅ **Complete CRUD Operations** - Create, read, update, and delete buyer leads
-- ✅ **Advanced Filtering** - Filter by city, property type, budget, timeline, and status
-- ✅ **Smart Search** - Full-text search across all lead fields
-- ✅ **Lead History Tracking** - Complete audit trail of all lead modifications
-- ✅ **Status Management** - Track lead progression through sales pipeline
-
-### 📊 CSV Import System
-- ✅ **Bulk Import** - Import hundreds of leads from CSV files
-- ✅ **Advanced Validation** - Multi-layer validation with detailed error reporting
-- ✅ **Data Cleaning** - Automatic phone number formatting, email validation
-- ✅ **Partial Import Support** - Import valid rows even if some fail validation
-- ✅ **Real-time Feedback** - Detailed import results with row-level error messages
-
-### 🔐 Security & Authentication
-- ✅ **JWT Authentication** - Secure token-based authentication
-- ✅ **Role-based Access** - Admin and user role management
-- ✅ **Rate Limiting** - API protection against abuse
-- ✅ **Input Validation** - Comprehensive server-side validation
-
-### 🎨 User Experience
-- ✅ **Responsive Design** - Works seamlessly on desktop and mobile
-- ✅ **Modern UI Components** - Beautiful, accessible UI components
-- ✅ **Loading States** - Smooth loading indicators and error handling
-- ✅ **Form Validation** - Real-time client-side validation
+- 🔐 Demo authentication with JWT
+- 📊 Server-side rendered buyer list with pagination and filters
+- 📝 Create and edit buyer leads with validation
+- 📁 CSV import/export functionality
+- 🔒 Role-based access control and ownership enforcement
+- ⚡ Rate limiting for API endpoints
+- 📱 Responsive and accessible UI
+- 🔄 Optimistic concurrency control
+- 📈 Buyer history tracking
+- 🛠️ Enhanced error handling and debugging
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- **Framework**: [Next.js 14](https://nextjs.org/) with App Router
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: Custom components with Radix UI primitives
-- **State Management**: React hooks and context
-- **HTTP Client**: Axios for API communication
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, React Hook Form, Zod
+- **Backend**: Node.js, Express, TypeScript, Prisma, PostgreSQL/SQLite
+- **Authentication**: JWT with demo login
+- **Validation**: Zod (shared between frontend and backend)
+- **Testing**: Vitest
+- **Deployment**: Vercel (Frontend), Railway/Render (Backend)
 
-### Backend
-- **Runtime**: [Node.js](https://nodejs.org/)
-- **Framework**: [Express.js](https://expressjs.com/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Database**: [SQLite](https://www.sqlite.org/) with [Prisma ORM](https://www.prisma.io/)
-- **Authentication**: JWT tokens
-- **Validation**: [Zod](https://zod.dev/) for schema validation
-- **File Upload**: [Multer](https://github.com/expressjs/multer) for CSV processing
+## 📁 Project Structure
 
-### Development Tools
-- **Package Manager**: [pnpm](https://pnpm.io/)
-- **Testing**: [Vitest](https://vitest.dev/)
-- **Linting**: [ESLint](https://eslint.org/)
-- **Type Checking**: TypeScript compiler
-- **Database Migrations**: Prisma Migrate
+```
+/
+├─ frontend/                 # Next.js app router + UI
+│  ├─ app/
+│  │  ├─ api/              # Next.js API routes
+│  │  │  ├─ auth/          # Authentication endpoints
+│  │  │  └─ buyers/        # Buyer management endpoints
+│  │  ├─ buyers/           # Buyer pages and components
+│  │  └─ login/            # Login page
+│  ├─ components/          # Reusable UI components
+│  ├─ lib/                 # Utilities and API client
+│  └─ package.json
+├─ backend/                 # API server + Prisma migrations
+│  ├─ src/
+│  │  ├─ routes/           # Express routes
+│  │  ├─ services/         # Business logic
+│  │  ├─ validators/       # Zod schemas
+│  │  └─ middleware/       # Auth, rate limiting
+│  ├─ prisma/              # Database schema and migrations
+│  └─ package.json
+└─ README.md
+```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- **Node.js** (v18 or higher)
-- **pnpm** (recommended) or npm
-- **Git**
+- Node.js 18+ and pnpm
+- PostgreSQL (or use SQLite for local development)
 
-### Installation
+### Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/AJ-coder-st/Buy-Lead-App.git
-   cd Buy-Lead-App
-   ```
-
-2. **Install dependencies**
-   ```bash
-   # Install root dependencies
-   pnpm install
-   
-   # Install backend dependencies
-   cd backend
-   pnpm install
-   
-   # Install frontend dependencies
-   cd ../frontend
-   pnpm install
-   ```
-
-3. **Environment Setup**
-   ```bash
-   # Backend environment
-   cd backend
-   cp .env.example .env
-   
-   # Frontend environment
-   cd ../frontend
-   cp .env.example .env.local
-   ```
-
-4. **Database Setup**
-   ```bash
-   cd backend
-   
-   # Generate Prisma client
-   pnpm prisma generate
-   
-   # Run database migrations
-   pnpm prisma migrate dev
-   
-   # Seed the database (optional)
-   pnpm prisma db seed
-   ```
-
-5. **Start Development Servers**
-   
-   **Backend** (Terminal 1):
-   ```bash
-   cd backend
-   pnpm dev
-   ```
-   
-   **Frontend** (Terminal 2):
-   ```bash
-   cd frontend
-   pnpm dev
-   ```
-
-6. **Access the Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:3001
-
-## 📁 Project Structure
-
-```
-Buy-Lead-App/
-├── 📁 backend/                 # Backend API server
-│   ├── 📁 prisma/             # Database schema and migrations
-│   │   ├── schema.prisma      # Prisma schema definition
-│   │   └── migrations/        # Database migration files
-│   ├── 📁 src/
-│   │   ├── 📁 middleware/     # Express middleware
-│   │   ├── 📁 routes/         # API route handlers
-│   │   ├── 📁 services/       # Business logic services
-│   │   ├── 📁 utils/          # Utility functions
-│   │   ├── 📁 validators/     # Data validation schemas
-│   │   └── index.ts           # Server entry point
-│   └── package.json
-├── 📁 frontend/               # Next.js frontend application
-│   ├── 📁 app/               # Next.js app directory
-│   │   ├── 📁 buyers/        # Buyer management pages
-│   │   ├── 📁 login/         # Authentication pages
-│   │   └── layout.tsx        # Root layout
-│   ├── 📁 components/        # Reusable UI components
-│   │   └── 📁 ui/           # Base UI components
-│   ├── 📁 lib/              # Utility libraries
-│   └── package.json
-├── 📄 simple_test.csv        # Sample CSV for testing
-├── 📄 test_comprehensive.csv # Comprehensive test data
-└── 📄 README.md             # This file
-```
-
-## 🔧 Configuration
-
-### Backend Environment Variables
-
-Create a `.env` file in the `backend` directory:
-
-```env
-# Database
-DATABASE_URL="file:./dev.db"
-
-# JWT Secret
-JWT_SECRET="your-super-secure-jwt-secret-key-here"
-
-# Server Configuration
-PORT=3001
-NODE_ENV=development
-
-# CORS Origins
-CORS_ORIGIN="http://localhost:3000"
-```
-
-### Frontend Environment Variables
-
-Create a `.env.local` file in the `frontend` directory:
-
+1. **Clone and install dependencies:**
 ```bash
-Authorization: Bearer <your-jwt-token>
+git clone https://github.com/AJ-coder-st/Buy-Lead-App.git
+cd Buy-Lead-App
+pnpm install
 ```
 
-## 🌐 API Documentation
+2. **Setup environment variables:**
+```bash
+# Backend
+cp backend/.env.example backend/.env
 
-### Authentication Endpoints
-
-#### POST `/api/auth/login`
-Login with email and password.
-
-**Request:**
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
+# Frontend
+cp frontend/.env.example frontend/.env.local
 ```
 
-**Response:**
-```json
-{
-  "token": "jwt-token-here",
-  "user": {
-    "id": "user-id",
-    "email": "user@example.com",
-    "name": "User Name",
-    "role": "user"
-  }
-}
+3. **Setup database:**
+```bash
+cd backend
+pnpm prisma migrate dev --name init
+pnpm prisma db seed
 ```
 
-### Buyer Management Endpoints
+4. **Start development servers:**
+```bash
+# From root directory
+pnpm dev
+```
 
-#### GET `/api/buyers`
-Get paginated list of buyers with optional filters.
+Or start individually:
+```bash
+# Backend (port 3001)
+cd backend && pnpm dev
 
-**Query Parameters:**
-- `page` - Page number (default: 1)
-- `limit` - Items per page (default: 10)
-- `city` - Filter by city
-- `propertyType` - Filter by property type
-- `status` - Filter by status
-- `search` - Search term
+# Frontend (port 3000)
+cd frontend && pnpm dev
+```
 
-#### POST `/api/buyers`
-Create a new buyer lead.
+## 🔧 Recent Fixes & Improvements
 
-#### GET `/api/buyers/:id`
-Get specific buyer by ID.
+### Vercel Deployment Issues Fixed
 
-#### PUT `/api/buyers/:id`
-Update buyer information.
+- ✅ **Replaced legacy API files** with proper Next.js route handlers under `app/api/`
+- ✅ **Removed incorrect Vercel configuration** that was misrouting API requests
+- ✅ **Fixed build configuration** by disabling `output: 'standalone'` to avoid Windows symlink issues
+- ✅ **Enhanced error handling** with detailed error messages in production
+- ✅ **Added comprehensive API routes** for all buyer operations
 
-#### DELETE `/api/buyers/:id`
-Delete a buyer lead.
+### API Routes Added
 
-#### POST `/api/buyers/import-csv`
-Import buyers from CSV file.
+- `GET/POST /api/auth/demo-login` - Demo authentication
+- `GET /api/auth/me` - User information
+- `GET/POST /api/buyers` - List and create buyers
+- `GET/PUT/DELETE /api/buyers/[id]` - Individual buyer operations
+- `GET /api/buyers/[id]/history` - Buyer change history
+- `POST /api/buyers/import-csv` - CSV import functionality
+- `GET /api/buyers/export.csv` - CSV export functionality
 
-**Request:** Multipart form data with `file` field containing CSV.
+### Error Handling Improvements
+
+- ✅ **Enhanced Error Boundary** with detailed error messages and stack traces
+- ✅ **API response validation** to catch malformed responses
+- ✅ **Better error logging** for debugging production issues
+- ✅ **Graceful fallbacks** for failed API calls
+
+## 📊 Environment Variables
+
+### Backend (.env)
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/buyer_leads"
+# Or for SQLite: "file:./dev.db"
+JWT_SECRET="your-jwt-secret-key"
+REDIS_URL="" # Optional for rate limiting
+```
+
+### Frontend (.env.local)
+```env
+NEXT_PUBLIC_API_URL="http://localhost:3001"
+```
+
+## 🎯 Usage
+
+### Demo Login
+1. Visit the live demo: https://frontend-cif9vfjni-bharath-wajs-projects-a57c3e59.vercel.app
+2. Click "Sign in as Demo User" to access the application
+3. Explore buyer management features
+
+### CSV Import
+1. Navigate to the Import page
+2. Download the template CSV file
+3. Fill in buyer data following the template format
+4. Upload the CSV file for bulk import
+
+### Buyer Management
+- **View**: Browse all buyers with pagination and filters
+- **Create**: Add new buyer leads with validation
+- **Edit**: Update existing buyer information
+- **Delete**: Remove buyer records
+- **Export**: Download buyer data as CSV
 
 ## 🧪 Testing
 
-### Running Tests
-
-**Backend Tests:**
+Run tests with:
 ```bash
-cd backend
 pnpm test
 ```
 
-**Frontend Tests:**
-```bash
-cd frontend
-pnpm test
-```
-
-### Test Coverage
-- Unit tests for validation logic
-- Integration tests for API endpoints
+Tests include:
+- Unit tests for validation functions
+- API endpoint tests
 - CSV import validation tests
-- Authentication flow tests
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Backend (Railway/Render)
+1. Set production environment variables
+2. Run migrations: `pnpm prisma migrate deploy`
+3. Build: `pnpm build`
+4. Start: `pnpm start`
+
+## 🔒 Security Features
+
+- JWT-based authentication with HTTP-only cookies
+- Rate limiting on create/update operations
+- Input validation on all endpoints
+- CORS and security headers configured
+- Server-side enforcement of data ownership rules
+
+## 📈 Performance
+
+- Server-side rendering for SEO and performance
+- Optimized database queries with Prisma
+- Client-side caching and optimistic updates
+- Responsive design for all screen sizes
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **"Something went wrong" error**: Check browser console for detailed error messages
+2. **API errors**: Verify environment variables are set correctly
+3. **Build failures**: Ensure all dependencies are installed with `pnpm install`
+
+### Debug Mode
+
+The error boundary now shows detailed error information in production, making it easier to identify and fix issues.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Make your changes**
-4. **Add tests** for new functionality
-5. **Commit your changes**
-   ```bash
-   git commit -m 'Add amazing feature'
-   ```
-6. **Push to the branch**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-7. **Open a Pull Request**
-
-### Development Guidelines
-- Follow TypeScript best practices
-- Write tests for new features
-- Use conventional commit messages
-- Update documentation as needed
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit changes: `git commit -m 'Add feature'`
+4. Push to branch: `git push origin feature-name`
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details
+
+## 🙏 Acknowledgments
+
+- Next.js team for the excellent framework
+- Vercel for seamless deployment
+- Prisma for the amazing ORM
+- Tailwind CSS for beautiful styling
 
 ---
 
-<div align="center">
+**Live Demo**: https://frontend-cif9vfjni-bharath-wajs-projects-a57c3e59.vercel.app
 
-**Built with ❤️ by [AJ-coder-st](https://github.com/AJ-coder-st)**
-
-⭐ Star this repository if you find it helpful!
-
-</div>
+**Repository**: https://github.com/AJ-coder-st/Buy-Lead-App
